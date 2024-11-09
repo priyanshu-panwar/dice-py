@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "dice-py"
+version = "0.1.0"
+description = ""
+authors = ["Priyanshu Panwar <priyanshu009ch@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pytest = "^8.3.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
