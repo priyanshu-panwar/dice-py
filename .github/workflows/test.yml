@@ -21,7 +21,6 @@ jobs:
         image: dicedb/dicedb
         ports:
           - 7379:7379
-        options: --enable-multithreading --enable-watch
 
     steps:
       - name: Checkout repository
