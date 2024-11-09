@@ -1,6 +1,10 @@
 import unittest
 import asyncio
 from dice_py.dice import Dice
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 
 class TestDice(unittest.TestCase):
@@ -13,12 +17,14 @@ class TestDice(unittest.TestCase):
         set_response = self.loop.run_until_complete(
             self.dice.set("test_key", "test_value")
         )
+        logger.debug(f"Set response: {set_response}")
         self.assertEqual(set_response, "OK")
 
     def test_get(self):
         # First, set the key to ensure it exists
         self.loop.run_until_complete(self.dice.set("test_key", "test_value"))
         get_response = self.loop.run_until_complete(self.dice.get("test_key"))
+        logger.debug(f"Get response: {get_response}")
         self.assertEqual(get_response, "test_value")
 
     def tearDown(self):
