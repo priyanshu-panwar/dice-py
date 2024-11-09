@@ -1,14 +1,30 @@
 [tool.poetry]
 name = "dice-py"
-version = "0.1.0"
-description = ""
+version = "0.0.1"
+description = "Python Client for DiceDB"
 authors = ["Priyanshu Panwar <priyanshu009ch@gmail.com>"]
 readme = "README.md"
+license = "MIT"
+homepage = "https://github.com/priyanshu-panwar/dice-py"
+repository = "https://github.com/priyanshu-panwar/dice-py"
+keywords = ["dice", "dice-py", "dice-db", "dicedb", "python", "client"]
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License"
+]
+
 
 [tool.poetry.dependencies]
 python = "^3.9"
-pytest = "^8.3.3"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
 
 [build-system]
 requires = ["poetry-core"]
