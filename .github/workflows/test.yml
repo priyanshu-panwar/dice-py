@@ -1,0 +1,68 @@
+name: 🧪Tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+
+    services:
+      dicedb:
+        image: dicedb/dicedb
+        ports:
+          - 7379:7379
+        options: --enable-multithreading --enable-watch
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache Poetry
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pypoetry
+            ~/.cache/pip
+          key: ${{ runner.os }}-poetry-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-${{ matrix.python-version }}-
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            .venv
+          key: ${{ runner.os }}-poetry-dependencies-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-dependencies-${{ matrix.python-version }}-
+
+      - name: Install dependencies
+        run: |
+          poetry install
+
+      - name: Install pytest
+        run: |
+          poetry add pytest
+
+      - name: Run tests
+        run: |
+          poetry run pytest
