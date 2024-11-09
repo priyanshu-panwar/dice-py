@@ -17,9 +17,9 @@ class TestDice(unittest.TestCase):
 
     def test_get(self):
         # First, set the key to ensure it exists
-        self.loop.run_until_complete(self.dice.set("test_key", 10))
+        self.loop.run_until_complete(self.dice.set("test_key", "value"))
         get_response = self.loop.run_until_complete(self.dice.get("test_key"))
-        self.assertEqual(get_response, "10")
+        self.assertEqual(get_response, "value")
 
     def test_delete(self):
         # First, set the key to ensure it exists

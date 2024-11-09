@@ -19,6 +19,9 @@ class Executor:
         if response.startswith("*"):
             lines = response.split("\r\n")
             return " ".join(lines[2::2])
+        elif response.startswith("$"):
+            lines = response.split("\r\n")
+            return lines[1]
         return response.split("\r\n")[0][1:]
 
     async def _execute_command(self, command: str):
