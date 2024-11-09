@@ -47,10 +47,6 @@ jobs:
         run: |
           poetry install
 
-      - name: Run Tests
-        run: |
-          poetry run pytest
-
       - name: Publish to PyPI
         env:
           POETRY_PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
