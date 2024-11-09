@@ -16,6 +16,9 @@ class Executor:
         """Send a command to the socket."""
         conn.sock.sendall(command.encode("utf-8"))
         response = conn.sock.recv(4096).decode("utf-8")
+        if response.startswith("*"):
+            lines = response.split("\r\n")
+            return " ".join(lines[2::2])
         return response.split("\r\n")[0][1:]
 
     async def _execute_command(self, command: str):
