@@ -1,14 +1,14 @@
 import asyncio
 import unittest
 from unittest.mock import patch, MagicMock
-from dice_py.connection.client import DiceClient
-from dice_py.connection.connect import Connect
-from dice_py.command.executor import Executor
+from dicedb_py.connection.client import DiceClient
+from dicedb_py.connection.connect import Connect
+from dicedb_py.command.executor import Executor
 
 
 class TestExecutor(unittest.TestCase):
 
-    @patch("dice_py.command.executor.Connect")
+    @patch("dicedb_py.command.executor.Connect")
     def test_send_command(self, mock_connect):
         mock_conn = MagicMock(spec=Connect)
         mock_conn.sock = MagicMock()
@@ -22,9 +22,9 @@ class TestExecutor(unittest.TestCase):
         mock_conn.sock.recv.assert_called_once_with(4096)
         self.assertEqual(response, "PONG")
 
-    @patch("dice_py.command.executor.to_resp", return_value="*1\r\n$4\r\nPING\r\n")
-    @patch("dice_py.command.executor.Executor._send_command", return_value="PONG")
-    @patch("dice_py.command.executor.DiceClient")
+    @patch("dicedb_py.command.executor.to_resp", return_value="*1\r\n$4\r\nPING\r\n")
+    @patch("dicedb_py.command.executor.Executor._send_command", return_value="PONG")
+    @patch("dicedb_py.command.executor.DiceClient")
     def test_execute_command(self, mock_client, mock_send_command, mock_to_resp):
         mock_conn = MagicMock(spec=Connect)
         mock_client.pool.get.return_value.__aenter__.return_value = mock_conn
@@ -37,12 +37,12 @@ class TestExecutor(unittest.TestCase):
         mock_send_command.assert_called_once_with("*1\r\n$4\r\nPING\r\n", mock_conn)
         self.assertEqual(response, "PONG")
 
-    @patch("dice_py.command.executor.to_resp", return_value="*1\r\n$4\r\nPING\r\n")
+    @patch("dicedb_py.command.executor.to_resp", return_value="*1\r\n$4\r\nPING\r\n")
     @patch(
-        "dice_py.command.executor.Executor._send_command",
+        "dicedb_py.command.executor.Executor._send_command",
         side_effect=OSError(9, "Bad file descriptor"),
     )
-    @patch("dice_py.command.executor.DiceClient")
+    @patch("dicedb_py.command.executor.DiceClient")
     def test_execute_command_reconnect(
         self, mock_client, mock_send_command, mock_to_resp
     ):
@@ -60,12 +60,12 @@ class TestExecutor(unittest.TestCase):
         mock_client.pool.get_new_connection.assert_called_once()
         self.assertEqual(response, "PONG")
 
-    @patch("dice_py.command.executor.to_resp", return_value="*1\r\n$4\r\nPING\r\n")
+    @patch("dicedb_py.command.executor.to_resp", return_value="*1\r\n$4\r\nPING\r\n")
     @patch(
-        "dice_py.command.executor.Executor._send_command",
+        "dicedb_py.command.executor.Executor._send_command",
         side_effect=Exception("Test Exception"),
     )
-    @patch("dice_py.command.executor.DiceClient")
+    @patch("dicedb_py.command.executor.DiceClient")
     def test_execute_command_exception(
         self, mock_client, mock_send_command, mock_to_resp
     ):

@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "dice-py"
-version = "0.0.1"
+name = "dicedb-py"
+version = "0.0.2"
 description = "Python Client for DiceDB"
 authors = ["Priyanshu Panwar <priyanshu009ch@gmail.com>"]
 readme = "README.md"
