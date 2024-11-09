@@ -6,7 +6,7 @@ Welcome to the **DiceDB Python Client**! This project provides an efficient way 
 
 ```bash
 import asyncio
-from dice_py import Dice
+from dicedb_py import Dice
 
 
 async def test():

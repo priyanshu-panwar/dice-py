@@ -1,5 +1,5 @@
 import unittest
-from dice_py.utils import to_resp
+from dicedb_py.utils import to_resp
 
 
 class TestToResp(unittest.TestCase):

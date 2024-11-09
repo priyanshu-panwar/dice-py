@@ -1,12 +1,12 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from dice_py.connection.client import DiceClient
-from dice_py.connection.pool import ConnectionPool
+from dicedb_py.connection.client import DiceClient
+from dicedb_py.connection.pool import ConnectionPool
 
 
 class TestDiceClient(unittest.TestCase):
 
-    @patch("dice_py.connection.client.ConnectionPool")
+    @patch("dicedb_py.connection.client.ConnectionPool")
     def test_init(self, MockConnectionPool):
         mock_pool = MagicMock(spec=ConnectionPool)
         MockConnectionPool.return_value = mock_pool

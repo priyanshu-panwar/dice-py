@@ -1,6 +1,6 @@
 import unittest
 import asyncio
-from dice_py.dice import Dice
+from dicedb_py.dice import Dice
 
 
 class TestDice(unittest.TestCase):

@@ -1,6 +1,6 @@
 import socket
 from unittest.mock import patch, MagicMock
-from dice_py.connection.connect import Connect
+from dicedb_py.connection.connect import Connect
 
 
 def test_init():
@@ -35,7 +35,7 @@ def test_close(mock_close):
 
 @patch("socket.socket.sendall")
 @patch("socket.socket.recv", return_value=b"+PONG\r\n")
-@patch("dice_py.connection.connect.to_resp", return_value="PING")
+@patch("dicedb_py.connection.connect.to_resp", return_value="PING")
 def test_ping(mock_to_resp, mock_recv, mock_sendall):
     host = "localhost"
     port = 7379
