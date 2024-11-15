@@ -1,3 +1,7 @@
+<p align="center">
+<a href="https://pepy.tech/projects/dicedb-py"><img src="https://static.pepy.tech/badge/dicedb-py" alt="PyPI Downloads"></a> <a href="https://pepy.tech/projects/dicedb-py"><img src="https://static.pepy.tech/badge/dicedb-py/month" alt="PyPI Downloads"></a>
+</p>
+
 # 🎲 DiceDB Python Client
 
 Welcome to the **DiceDB Python Client**! This project provides an efficient way to interact with **DiceDB** using Python, managing connection pools and executing commands with ease.
